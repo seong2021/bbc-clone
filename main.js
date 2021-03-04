@@ -1,6 +1,7 @@
 (() => {
   const stepElems = document.querySelectorAll(".step");
   const graphicElems = document.querySelectorAll(".graphic-item");
+  let currentItem; // 현재 활성화된 .graphic-item을 지정
 
   for (let i = 0; i < stepElems.length; i++) {
     // stepElems[i].setAttribute("data-index", i);
@@ -19,7 +20,11 @@
         boundingRect.top > window.innerHeight * 0.1 &&
         boundingRect.top < window.innerHeight * 0.8
       ) {
-        graphicElems[step.dataset.index].classList.add("visible");
+        if (currentItem) {
+          currentItem.classList.remove("visible");
+        }
+        currentItem = graphicElems[step.dataset.index];
+        currentItem.classList.add("visible");
       }
     }
   });
